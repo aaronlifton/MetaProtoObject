@@ -55,13 +55,13 @@ class Array
         h[i] = e
       end
     else
-      return if self.any? {|e| e.length != 2}
+      return if self.any? {|e| e.length != 2 && e.class != Array}
       if e.length == 2
         h = Hash.new
         self.each do |e|
           h[e[0]] = e[1]
         end
-      elsif e[0].length == 2
+      elsif e[0].length == 2 && e.class == Array
         self.map!(&:to_hash)
       end
     end
