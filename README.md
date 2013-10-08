@@ -18,6 +18,9 @@
     pry(main)> ∃ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
       => true
 
+    pry(main)> ∃t [1,2,"cat",3], Fixnum
+      => true
+
     pry(main)> class B; end;
     pry(main)> x = B.replicate(5)
       => [B, B, B, B, B]

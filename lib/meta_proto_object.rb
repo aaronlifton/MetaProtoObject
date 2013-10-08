@@ -23,9 +23,17 @@ module KernelExtensions
   def ∀(a, &blk)
     a.all? { |e| blk.call(e) == true }
   end
+
+  def ∀t(a, klass)
+    a.all? { |e| e.is_a?(klass) }
+  end
   
   def ∃(a, &blk)
     a.any? { |e| blk.call(e) == true }
+  end
+
+  def ∃t(a, klass)
+    a.any? { |e| e.is_a?(klass) }
   end
 end
 
