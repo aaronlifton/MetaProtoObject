@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module KernelExtensions
  def ø(klass)
     if klass == String
