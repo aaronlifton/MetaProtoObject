@@ -1,3 +1,7 @@
+### Introduction
+
+### Usage
+
     class B; end;
     pry(main)> x = B.replicate(5)
       => [B, B, B, B, B]
