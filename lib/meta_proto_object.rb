@@ -91,13 +91,47 @@ end
 Object.extend(MetaProtoObject)
 
 module TypedObject
-  # TODO
-  class TypedNumeric
-  end
+  # Symbol, Class
+  def type_check_method(method, type)
 
-  class TypedString
+    # here we dynamically define accessor methods
+    define_method(method) do
+      # unfortunately you have to add the @ here, so string interpolation comes to help
+      instance_method(method)
+    end
+
+    define_method("#{method.to_s}=") do |value|
+      # simply check a type and raise an exception if it's not what we want
+      # since this type of Ruby block is a closure, we don't have to store the 
+      # 'type' variable, it will 'remember' it's value 
+      if value.is_a? type
+        class_def(method.to_s, value)
+      else
+        raise ArgumentError.new("Invalid Type")
+      end
+    end
+  end
+  
+  # String, Class
+  def type_check_attr(name, type)
+
+    # here we dynamically define accessor methods
+    define_method(name) do
+      # unfortunately you have to add the @ here, so string interpolation comes to help
+      instance_variable_get("@#{name}")
+    end
+
+    define_method("#{name}=") do |value|
+      # simply check a type and raise an exception if it's not what we want
+      # since this type of Ruby block is a closure, we don't have to store the 
+      # 'type' variable, it will 'remember' it's value 
+      if value.is_a? type
+        instance_variable_set("@#{name}", value)
+      else
+        raise ArgumentError.new("Invalid Type")
+      end
+    end
   end
 end
 
-# Object.extend(TypedObject)
-
+Object.extend(TypedObject)
