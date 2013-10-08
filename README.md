@@ -2,7 +2,23 @@
 
 ### Usage
 
-    class B; end;
+    pry(main)> ø(String)
+      => ""
+    
+    pry(main)> ø(Fixnum)
+      => 0
+
+    pry(main)> x = λ {|e| e + 1}
+      => x(2)
+        => 3
+
+    pry(main)> ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
+      => false
+
+    pry(main)> ∃ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
+      => true
+
+    pry(main)> class B; end;
     pry(main)> x = B.replicate(5)
       => [B, B, B, B, B]
 

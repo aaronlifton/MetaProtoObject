@@ -20,11 +20,11 @@ module KernelExtensions
     
   alias :λ, :lambda
   
-  def ∀(&blk)
-    !a.any? { |e| blk.call(e) == false }
+  def ∀(a, &blk)
+    a.all? { |e| blk.call(e) == true }
   end
   
-  def ∃(&blk)
+  def ∃(a, &blk)
     a.any? { |e| blk.call(e) == true }
   end
 end
