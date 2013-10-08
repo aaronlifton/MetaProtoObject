@@ -1,4 +1,38 @@
+module KernelExtensions
+ def ø(klass)
+    if klass == String
+      ""
+    elsif klass == Fixnum
+      0
+    elsif klass == Array
+      []
+    elsif klass == Hash
+      {}
+    elsif klass == NilClass
+      nil
+    end
+  end
+    
+  def λ(&blk)
+    blk.call
+  end
+  
+  def ∀(&blk)
+    !a.any? { |e| blk.call(e) == false }
+  end
+  
+  def  ∃(&blk)
+    a.any? { |e| blk.call(e) == true }
+  end
+end
+
+
+module Kernel
+  include KernelExtensions
+end
+
 module MetaProtoObject
+
   # Returns an instance of an Object's Metaclass
   def metaclass
     class << self; self; end;
