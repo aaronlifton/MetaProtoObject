@@ -55,8 +55,9 @@ class Array
         h[i] = e
       end
     else
-      return if self.any? {|e| e.length != 2 && e.class != Array}
-      if e.length == 2
+      if self.any? {|e| e.length != 2 && e.class != Array}
+        raise ArgumentError, "Length of all arrays and sub-arrays must equal 2" 
+      elsif e.length == 2
         h = Hash.new
         self.each do |e|
           h[e[0]] = e[1]
