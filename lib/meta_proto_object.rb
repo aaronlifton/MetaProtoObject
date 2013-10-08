@@ -2,28 +2,29 @@
 
 module KernelExtensions
  def ø(klass)
-    if klass == String
+    case klass
+    when String
       ""
-    elsif klass == Fixnum
+    when Fixnum
       0
-    elsif klass == Array
+    when Float
+      0.0
+    when Array
       []
-    elsif klass == Hash
+    when Hash
       {}
-    elsif klass == NilClass
+    when NilClass
       nil
     end
   end
     
-  def λ(&blk)
-    blk.call
-  end
+  alias :λ, :lambda
   
   def ∀(&blk)
     !a.any? { |e| blk.call(e) == false }
   end
   
-  def  ∃(&blk)
+  def ∃(&blk)
     a.any? { |e| blk.call(e) == true }
   end
 end
