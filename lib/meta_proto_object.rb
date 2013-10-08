@@ -100,12 +100,12 @@ module TypedObject
       instance_method(meth)
     end
 
-    define_method("#{meth.to_s}=") do |value|
+    class_def("#{meth.to_s}=") do |value|
       # simply check a type and raise an exception if it's not what we want
       # since this type of Ruby block is a closure, we don't have to store the 
       # 'type' variable, it will 'remember' it's value 
       if value.is_a? type
-        class_def(meth.to_s, value)
+        define_method(meth.to_s, value)
       else
         raise ArgumentError.new("Invalid Type")
       end
