@@ -35,6 +35,22 @@ module KernelExtensions
   def ∃t(a, klass)
     a.any? { |e| e.is_a?(klass) }
   end
+
+  def Δ(x, y)
+    (x - y).abs
+  end
+
+  def π
+    Math::PI
+  end
+
+  def ƒ(a, &blk)
+    a.fold(&blk)
+  end
+
+  def ∫(a)
+    a.fold {|x,y| x + y}
+  end
 end
 
 
@@ -43,6 +59,14 @@ module Kernel
 end
 
 module MetaProtoObject
+
+  def ≠(x)
+    self != x
+  end
+
+  def ≈(x)
+    self == x || self == x * 1.0 || self == x.ceil || self == x.floor
+  end
 
   # Returns an instance of an Object's Metaclass
   def metaclass
