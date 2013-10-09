@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module KernelExtensions
+module MainExtensions
  def ø(klass)
     case klass
     when String
@@ -18,8 +18,19 @@ module KernelExtensions
     end
   end
     
-  alias :λ, :lambda
-  
+  def λ(&blk)
+    blk.call
+  end
+
+  def let(name, &blk)
+    if blk.arity == 1
+      # binding.pry
+      class_eval { define_method name { blk.call(blk.parameters.map {|p| p[1]}) } }
+    else
+      class_eval { define_method name { blk.call } }
+    end
+  end
+
   def ∀(a, &blk)
     a.all? { |e| blk.call(e) == true }
   end
@@ -53,10 +64,7 @@ module KernelExtensions
   end
 end
 
-
-module Kernel
-  include KernelExtensions
-end
+self.instance_eval { include MainExtensions }
 
 module MetaProtoObject
 
@@ -111,7 +119,7 @@ module MetaProtoObject
     x = self.instance_methods(false) if x.empty?
     x.each do |meth|
       remove_method meth.to_sym
-      undef meth.to_sym if global
+      undef meth if global
     end
   end
 end
@@ -149,11 +157,11 @@ class Hash
   end
 
   def stringify
-    self.map { |k,v| [ k.to_s, v.to_s ] } ]
+    self.map { |k,v| [ k.to_s, v.to_s ] }
   end
 
   def symbolize
-    self.map { |k,v| [ k.to_sym, v.to_sym ] } ]
+    self.map { |k,v| [ k.to_sym, v.to_sym ] }
   end
 end
 
