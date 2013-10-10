@@ -23,7 +23,7 @@ class LambdaProxy
   end
 
   def [](*args)
-    blk.call(*args)
+    @blk.call(*args)
   end
 
   def method_missing(meth, *args, &blk)
@@ -62,7 +62,7 @@ module MainExtensions
 
   def let(name, args = [nil], &blk)
     class_eval {
-      define_method name, ->(*args) {blk.call}
+      define_method name, ->(*args) { blk.call }
     }
   end
 
