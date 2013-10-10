@@ -2,11 +2,11 @@
 
 require File.join(File.expand_path(File.dirname(__FILE__)), 'meta_proto_object.rb')
 
-puts ø(String) == ""
-puts ø(Fixnum) == 0
+p ø(String) == ""
+p ø(Fixnum) == 0
 x = λ {|y| y + 1 }
-puts x[2]
+p x[2]
 
-puts ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
-puts ∃ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
-puts ∃t [1,2,"cat",3], Fixnum
+p ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
+p ∃ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
+p ∃t [1,2,"cat",3], Fixnum

@@ -15,7 +15,7 @@ class Object
 end
 
 # λ
-class LambdaProc
+class LambdaProxy
   attr_accessor :blk
 
   def initialize(&blk)
@@ -34,18 +34,21 @@ end
 
 module MainExtensions
  def ø(klass)
-    case klass
-    when String
+    klass = klass.class unless klass.class == Class
+    case klass.to_s
+    when "String"
       ""
-    when Fixnum
+    when "Fixnum"
       0
-    when Float
+    when "Float"
       0.0
-    when Array
+    when "Array"
       []
-    when Hash
+    when "Hash"
       {}
-    when NilClass
+    when "NilClass"
+      nil
+    else
       nil
     end
   end
@@ -54,7 +57,7 @@ module MainExtensions
 
   def λ(&blk)
     p = Proc.new &blk
-    return LambdaProc.new &p
+    return LambdaProxy.new &p
   end
 
   def let(name, args = [nil], &blk)
