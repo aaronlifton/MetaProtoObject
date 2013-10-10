@@ -91,7 +91,7 @@ module MainExtensions
   end
 
   def ∞
-    Math::INFINITY
+    Float::INFINITY
   end
 
   def ƒ(a, &blk)
