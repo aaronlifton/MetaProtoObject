@@ -112,7 +112,8 @@ module MetaProtoObject
   end
 
   def ≈(x)
-    self == x || self == x * 1.0 || self == x.ceil || self == x.floor
+    self == x || self == x * 1.0 || 
+      self.is_a?(Float) && (self == x.ceil || self == x.floor)
   end
 
   # Returns an instance of an Object's Metaclass
