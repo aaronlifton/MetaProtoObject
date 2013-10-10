@@ -1,5 +1,37 @@
 # encoding: UTF-8
 
+class Object
+  alias_method :orig_method_missing, :method_missing
+  
+  def method_missing(m, *a, &b)
+    klass = begin
+      (self.is_a?(Module) ? self : self.class).const_get(m)
+    rescue NameError
+    end
+  
+    return klass.send(:parens, *a, &b)  if klass.respond_to? :parens
+    orig_method_missing m, *a, &b
+  end
+end
+
+# λ
+class LambdaProc
+  attr_accessor :blk
+
+  def initialize(&blk)
+    @blk = blk
+  end
+
+  def [](*args)
+    blk.call(*args)
+  end
+
+  def method_missing(meth, *args, &blk)
+    @blk.send(meth, *args, &blk)
+  end
+end
+
+
 module MainExtensions
  def ø(klass)
     case klass
@@ -17,18 +49,18 @@ module MainExtensions
       nil
     end
   end
-    
+  
+  # alias :λ :lambda
+
   def λ(&blk)
-    blk.call
+    p = Proc.new &blk
+    return LambdaProc.new &p
   end
 
-  def let(name, &blk)
-    if blk.arity == 1
-      # binding.pry
-      class_eval { define_method name { blk.call(blk.parameters.map {|p| p[1]}) } }
-    else
-      class_eval { define_method name { blk.call } }
-    end
+  def let(name, args = [nil], &blk)
+    class_eval {
+      define_method name, ->(*args) {blk.call}
+    }
   end
 
   def ∀(a, &blk)
@@ -53,6 +85,10 @@ module MainExtensions
 
   def π
     Math::PI
+  end
+
+  def ∞
+    Math::INFINITY
   end
 
   def ƒ(a, &blk)

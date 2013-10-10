@@ -9,7 +9,7 @@
       => 0
 
     pry(main)> x = λ {|e| e + 1}
-      => x(2)
+      => x[2]
         => 3
 
     pry(main)> ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
