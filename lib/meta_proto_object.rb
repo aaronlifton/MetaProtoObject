@@ -57,7 +57,7 @@ module MainExtensions
 
   def λ(&blk)
     p = Proc.new &blk
-    return LambdaProxy.new &p
+    LambdaProxy.new &p
   end
 
   def let(name, args = [nil], &blk)
