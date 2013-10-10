@@ -12,6 +12,10 @@
       => x[2]
         => 3
 
+    pry(main)> y = λ {|x, y| x + y}
+      => y[1,2]
+        => 3
+
     pry(main)> ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
       => false
 
