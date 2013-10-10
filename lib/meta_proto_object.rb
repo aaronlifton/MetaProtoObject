@@ -95,11 +95,11 @@ module MainExtensions
   end
 
   def ƒ(a, &blk)
-    a.fold(&blk)
+    a.inject &blk
   end
 
   def ∫(a)
-    a.fold {|x,y| x + y}
+    a.inject(0) {|x,y| x + y}
   end
 end
 
