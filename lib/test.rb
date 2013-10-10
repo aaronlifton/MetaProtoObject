@@ -5,7 +5,7 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'meta_proto_object.r
 p ø(String) == ""
 p ø(Fixnum) == 0
 x = λ {|y| y + 1 }
-p x(2)
+p x[2]
 y = λ {|x, y| x + y}
 p y[1,2]
 
