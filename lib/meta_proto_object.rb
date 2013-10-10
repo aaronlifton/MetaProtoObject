@@ -59,6 +59,7 @@ module MainExtensions
     p = Proc.new &blk
     LambdaProxy.new &p
   end
+  alias :L :λ
 
   def let(name, args = [nil], &blk)
     class_eval {
@@ -85,18 +86,22 @@ module MainExtensions
   def Δ(x, y)
     (x - y).abs
   end
+  alias :delta :Δ
 
   def π
     Math::PI
   end
+  alias :pi :π
 
   def ∞
     Float::INFINITY
   end
+  alias :infinity :∞
 
   def ƒ(a, &blk)
     a.inject &blk
   end
+  alias :fold :ƒ
 
   def ∫(a)
     a.inject(0) {|x,y| x + y}

@@ -19,6 +19,10 @@
     pry(main)> ƒ [1,2,3,4] {|x,y| x + y}
       => 10
 
+    pry(main)> z = L {|x| ƒ(x) {|x,y| x + y}}
+      => z[[1,2]]
+        => 3
+
     pry(main)> ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
       => false
 
