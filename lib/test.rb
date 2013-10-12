@@ -13,6 +13,7 @@ p z[[1,2]]
 
 
 p ƒ [1,2,3,4] {|x,y| x + y}
+p fold [1,2,3,4] {|x,y| x + y}
 
 p ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
 p ∃ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }

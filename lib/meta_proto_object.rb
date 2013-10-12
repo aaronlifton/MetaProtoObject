@@ -102,6 +102,7 @@ module MainExtensions
     a.inject &blk
   end
   alias :fold :ƒ
+  alias :foldRight :ƒ
 
   def ∫(a)
     a.inject(0) {|x,y| x + y}
