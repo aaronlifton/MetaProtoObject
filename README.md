@@ -22,6 +22,9 @@
     pry(main)> z = λ {|x| fold(x) {|x,y| x + y}}
       => z[[1,2]]
         => 3
+        
+    pry(main)> λ {|x| fold(x) {|x,y| x + y}}[[1,2]]
+        => 3
 
     pry(main)> ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
       => false
