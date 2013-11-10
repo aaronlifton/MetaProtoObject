@@ -107,6 +107,14 @@ module MainExtensions
   def ∫(a)
     a.inject(0) {|x,y| x + y}
   end
+
+  def increment(a)
+    if a.is_a?(Array)
+      a.map {|x| x + 1}
+    elsif a.is_a?(Numeric)
+      a + 1
+    end
+  end
 end
 
 self.instance_eval { include MainExtensions }
