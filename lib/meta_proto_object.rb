@@ -103,6 +103,11 @@ module MainExtensions
   end
   alias :fold :ƒ
   alias :foldRight :ƒ
+  
+  def fmap(a, &blk)
+    a.map &blk
+  end
+
 
   def ∫(a)
     a.inject(0) {|x,y| x + y}
