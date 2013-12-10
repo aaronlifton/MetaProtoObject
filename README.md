@@ -18,6 +18,9 @@
 
     pry(main)> fold [1,2,3,4] {|x,y| x + y}
       => 10
+      
+    pry(main)> fmap [1,2,3] {|x| x + 1}
+      => [2,3,4]
 
     pry(main)> z = λ {|x| fold(x) {|x,y| x + y}}
       => z[[1,2]]
