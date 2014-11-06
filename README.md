@@ -75,6 +75,14 @@
 #### Delta
     pry(main)> Δ(-1, 3)
       => 4
+
 #### Infinity
-    pry(main)> ∞ == INFINITY
+    pry(main)> ∞ == infinity
       => true
+
+    pry(main)> r = Range.new(0, ∞)
+      r.take(1)
+
+#### Functional Sum
+    pry(main)> ∫([1,2,3,4])
+      => 10
