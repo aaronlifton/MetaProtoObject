@@ -1,4 +1,4 @@
-### Introduction
+## Introduction
 
 ### Usage
 
@@ -36,6 +36,11 @@
     pry(main)> ∀ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
       => false
       
+#### Universal type quantification
+      
+    pry(main)> ∀t [1,2,"doge",6], Fixnum
+      => false
+      
 #### Existential quantification
     pry(main)> ∃ [1,2,"cat",3] { |e| e.is_a?(Fixnum) }
       => true
@@ -65,3 +70,11 @@
     pry(main)> x.to_a
       => [["cat", "dog"], [1, 2]]
       
+### Utility functions
+
+#### Delta
+    pry(main)> Δ(-1, 3)
+      => 4
+#### Infinity
+    pry(main)> ∞ == INFINITY
+      => true
