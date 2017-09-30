@@ -26,8 +26,8 @@ class LambdaProxy
     @blk.call(*args)
   end
 
-  def method_missing(meth, *args, &blk)
-    @blk.send(meth, *args, &blk)
+  def method_missing(m, *args, &blk)
+    @blk.send(m, *args, &blk)
   end
 end
 
@@ -176,9 +176,9 @@ module MetaProtoObject
   # x: Array[Symbol]
   def delete_methods(x = [], global = false)
     x = self.instance_methods(false) if x.empty?
-    x.each do |meth|
-      remove_method meth.to_sym
-      undef meth if global
+    x.each do |m|
+      remove_method m.to_sym
+      undef m if global
     end
   end
 end
@@ -228,20 +228,20 @@ Object.extend(MetaProtoObject)
 
 module TypedObject
   # Symbol, Class
-  def type_check_method(meth, type)
+  def type_check_method(m, type)
 
     # here we dynamically define accessor methods
-    define_method(meth) do
+    define_method(m) do
       # unfortunately you have to add the @ here, so string interpolation comes to help
-      instance_method(meth)
+      instance_method(m)
     end
 
-    class_def("#{meth.to_s}=") do |value|
+    class_def("#{m.to_s}=") do |value|
       # simply check a type and raise an exception if it's not what we want
       # since this type of Ruby block is a closure, we don't have to store the 
       # 'type' variable, it will 'remember' it's value 
       if value.is_a? type
-        define_method(meth.to_s, value)
+        define_method(m.to_s, value)
       else
         raise ArgumentError.new("Invalid Type")
       end
